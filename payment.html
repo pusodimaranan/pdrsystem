@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment | Pio De Roda Cafe and Restaurant</title>
+  <meta name="description" content="Reservation deposit payment for Pio De Roda Cafe and Restaurant. Test module — no real payments are processed.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Same design system as the rest of the site -->
+  <link rel="stylesheet" href="../nav.css">
+  <link rel="stylesheet" href="../status.css">
+  <link rel="stylesheet" href="../booking-status.css">
+  <link rel="stylesheet" href="payment.css">
+</head>
+<body>
+  <!-- ============ NAVIGATION BAR (same as the other pages) ============ -->
+  <header class="site-header" id="site-header">
+    <nav class="navbar">
+      <a href="../nav.html#home" class="brand">
+        <img src="../pioderodalogo.jpg" alt="Pio De Roda Cafe and Restaurant logo" class="brand-mark">
+        <span class="brand-name">Pio De Roda Cafe<small>Restaurant &amp; Catering Services</small></span>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="../nav.html#home" class="nav-link">Home</a></li>
+        <li><a href="../nav.html#about" class="nav-link">About Us</a></li>
+        <li><a href="../nav.html#availability" class="nav-link">Availability</a></li>
+        <li><a href="../nav.html#contact" class="nav-link">Contact</a></li>
+        <li><a href="../nav.html#guide" class="nav-link">Guide</a></li>
+        <li><a href="../booking-status.html" class="nav-link active-link" aria-current="page">Booking Status</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="pay-main">
+    <div class="pay-wrap">
+      <p class="pay-kicker">PAYMENT MODULE</p>
+      <h1>Reservation Payment</h1>
+      <p class="pay-intro">Pay the required reservation deposit for a CONFIRMED booking. Your reservation must be confirmed by Pio De Roda staff before payment becomes available.</p>
+
+      <!-- ============ TEST MODE BANNER — always visible ============ -->
+      <div class="pay-test-banner" role="note">
+        <p class="pay-test-banner-title">PAYMENT TEST MODE</p>
+        <p>This is a <strong>test module</strong>. No real payment gateway is connected, no money is transferred, and no card details or payment passwords are collected. All results shown here are simulations.</p>
+      </div>
+
+      <!-- ============ STATE A: verification form (no verified booking yet) ============ -->
+      <section class="pay-card" id="payVerifyCard" aria-labelledby="payVerifyTitle">
+        <p class="pay-card-kicker" id="payVerifyTitle">VERIFY YOUR RESERVATION</p>
+        <p class="pay-note">Enter the Reservation ID and Booking PIN you received when you submitted your reservation. Payment is only available after staff confirmation.</p>
+        <form id="payVerifyForm" novalidate autocomplete="off">
+          <div class="pay-field">
+            <label for="payResId">Reservation ID</label>
+            <input type="text" id="payResId" placeholder="PDR-2026-0001" autocomplete="off" autocapitalize="characters" spellcheck="false">
+          </div>
+          <div class="pay-field">
+            <label for="payResPin">Booking PIN</label>
+            <input type="password" id="payResPin" inputmode="numeric" maxlength="6" placeholder="6-digit PIN" autocomplete="off">
+          </div>
+          <div class="pay-err" id="payVerifyError" role="alert"></div>
+          <button type="submit" class="btn btn-primary" id="payVerifyBtn">Verify Reservation</button>
+        </form>
+        <p class="pay-back"><a href="../booking-status.html">← Back to Booking Status</a></p>
+      </section>
+
+      <!-- ============ STATE B: no valid reservation ============ -->
+      <section class="pay-card pay-center" id="payNoAccess" hidden>
+        <p class="pay-card-kicker">PAYMENT NOT AVAILABLE</p>
+        <h2>No valid reservation found</h2>
+        <p>We could not find a reservation to pay for. Please open your Booking Status page and verify your Reservation ID and Booking PIN first.</p>
+        <a class="btn btn-primary" href="../booking-status.html">Go to Booking Status</a>
+      </section>
+
+      <!-- ============ STATE C: reservation still Pending ============ -->
+      <section class="pay-card pay-center" id="payPending" hidden>
+        <p class="pay-card-kicker">RESERVATION STATUS</p>
+        <h2>Your reservation is still awaiting confirmation.</h2>
+        <p class="pay-pending-msg">Payment is not available yet.<br>Please check your Booking Status again later.</p>
+        <p class="pay-note">Only Pio De Roda staff can confirm a reservation. Once it is confirmed, the Proceed to Payment option will appear on your Booking Status page.</p>
+        <a class="btn btn-primary" href="../booking-status.html">Back to Booking Status</a>
+      </section>
+
+      <!-- ============ STATE D: CONFIRMED — full payment interface ============ -->
+      <div id="payRoot" hidden>
+
+        <!-- A. RESERVATION INFORMATION -->
+        <section class="pay-card" id="payReservationCard" aria-labelledby="payResTitle">
+          <p class="pay-card-kicker" id="payResTitle">RESERVATION INFORMATION</p>
+          <div class="pay-rows" id="payReservationRows"></div>
+        </section>
+
+        <!-- B. PAYMENT SUMMARY -->
+        <section class="pay-card" id="paySummaryCard" aria-labelledby="paySumTitle">
+          <p class="pay-card-kicker" id="paySumTitle">PAYMENT SUMMARY</p>
+          <div class="pay-rows" id="paySummaryRows"></div>
+          <p class="pay-note" id="payDepositNote">The ₱2,000.00 reservation deposit is deducted from your final bill — it is never added on top of the estimated total.</p>
+        </section>
+
+        <!-- C. BOOKING &amp; RESERVATION GUIDELINES (exact business policy text) -->
+        <section class="pay-card" id="payGuidelinesCard" aria-labelledby="payGuideTitle">
+          <p class="pay-card-kicker" id="payGuideTitle">BOOKING &amp; RESERVATION GUIDELINES</p>
+          <ol class="pay-guidelines" id="payGuidelinesList"></ol>
+          <p class="pay-note">Payment milestones beyond the reservation deposit follow the business's accounting rules, which are still being finalized by the management.</p>
+        </section>
+
+        <!-- D. PAYMENT METHOD (placeholder options) -->
+        <section class="pay-card" id="payMethodCard" aria-labelledby="payMethodTitle">
+          <p class="pay-card-kicker" id="payMethodTitle">SELECT PAYMENT METHOD</p>
+          <p class="pay-note">Placeholder options pending approval of Pio De Roda management. No real payment channel, QR code, or account number is connected to this test module.</p>
+          <form id="payMethodForm">
+            <div class="pay-methods">
+              <label class="pay-method"><input type="radio" name="payMethod" value="GCash"><span class="pay-method-name">GCash</span><span class="pay-tag">Placeholder</span></label>
+              <label class="pay-method"><input type="radio" name="payMethod" value="Maya"><span class="pay-method-name">Maya</span><span class="pay-tag">Placeholder</span></label>
+              <label class="pay-method"><input type="radio" name="payMethod" value="Bank Transfer"><span class="pay-method-name">Bank Transfer</span><span class="pay-tag">Placeholder</span></label>
+              <label class="pay-method"><input type="radio" name="payMethod" value="Pay at the Cafe"><span class="pay-method-name">Pay at the Cafe</span><span class="pay-tag">Placeholder</span></label>
+            </div>
+            <div class="pay-err" id="payMethodError" role="alert"></div>
+            <button type="submit" class="btn btn-primary" id="payMethodBtn">Continue</button>
+            <p class="pay-selected" id="paySelectedMethod" hidden></p>
+          </form>
+        </section>
+
+        <!-- E. PAYMENT TEST MODE (simulated transactions only) -->
+        <section class="pay-card pay-test-card" id="payTestCard" hidden aria-labelledby="payTestTitle">
+          <p class="pay-card-kicker" id="payTestTitle">PAYMENT TEST MODE</p>
+          <div class="pay-rows" id="payTestRows"></div>
+          <div class="pay-test-actions">
+            <button type="button" class="btn-test btn-test-ok" id="simSuccessBtn">Simulate Successful Payment</button>
+            <button type="button" class="btn-test btn-test-fail" id="simFailBtn">Simulate Failed Payment</button>
+            <button type="button" class="btn-test btn-test-cancel" id="simCancelBtn">Cancel</button>
+          </div>
+          <p class="pay-note">These buttons exist in TEST MODE only. In production they must be removed and replaced with server-verified results from an approved payment provider.</p>
+          <div class="pay-result" id="payResult" hidden aria-live="polite"></div>
+        </section>
+
+        <p class="pay-foot"><a href="../booking-status.html">← Back to Booking Status</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../pioderodalogo.jpg" alt="Pio De Roda Cafe and Restaurant logo" class="brand-mark">
+        <div>
+          <p class="footer-title">Pio De Roda Cafe</p>
+          <p class="footer-tagline">Catering, celebrations, and events made simple.</p>
+        </div>
+      </div>
+      <ul class="footer-links">
+        <li><a href="../nav.html#home">Home</a></li>
+        <li><a href="../nav.html#about">About Us</a></li>
+        <li><a href="../nav.html#contact">Contact</a></li>
+        <li><a href="../nav.html#guide">Guide</a></li>
+        <li><a href="../booking-status.html">Booking Status</a></li>
+      </ul>
+    </div>
+    <p class="footer-copy">&copy; 2026 Pio De Roda Cafe. All Rights Reserved.</p>
+  </footer>
+
+  <!-- services.js holds the BACKEND AREA (findReservation) and the guideline
+       text; payment.js must load after it. -->
+  <script src="../services.js"></script>
+  <script src="payment.js"></script>
+</body>
+</html>

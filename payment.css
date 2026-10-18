@@ -1,0 +1,245 @@
+/* =====================================================
+   PAYMENT MODULE — styles
+   Uses the same variables and fonts as nav.css / booking-status.css
+   (Fraunces for display, Work Sans for body; maroon/cream/gold palette).
+   ===================================================== */
+.pay-main {
+  padding: calc(var(--nav-height) + 2.5rem) 1.5rem 4rem;
+  background: var(--cream-soft);
+  min-height: 70vh;
+}
+.pay-wrap { max-width: 860px; margin: 0 auto; }
+
+.pay-kicker {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.pay-wrap > h1 {
+  font-family: var(--font-display);
+  color: var(--maroon);
+  font-size: clamp(1.9rem, 3vw, 2.6rem);
+  margin-bottom: 0.4rem;
+}
+.pay-intro { max-width: 62ch; margin-bottom: 1.4rem; }
+
+/* ---------- TEST MODE banner — impossible to miss ---------- */
+.pay-test-banner {
+  background: #FFF7E3;
+  border: 2px dashed var(--gold);
+  border-radius: var(--radius-lg);
+  padding: 1rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+.pay-test-banner-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #7A5410;
+  margin-bottom: 0.35rem;
+}
+.pay-test-banner p:last-child { margin: 0; font-size: 0.92rem; color: var(--text-dark); }
+
+/* ---------- Cards ---------- */
+.pay-card {
+  background: var(--cream);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  padding: 1.8rem;
+  margin-bottom: 1.3rem;
+}
+.pay-card-kicker {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.9rem;
+}
+.pay-card h2 { font-family: var(--font-display); color: var(--maroon); font-size: 1.5rem; margin-bottom: 0.6rem; }
+.pay-center { text-align: center; }
+.pay-center p { margin-bottom: 0.9rem; }
+.pay-pending-msg {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+.pay-note { font-size: 0.84rem; color: var(--text-muted); font-style: italic; margin: 0.8rem 0 0; }
+.pay-back, .pay-foot { margin-top: 1.2rem; font-size: 0.92rem; }
+.pay-back a, .pay-foot a { color: var(--crimson); text-decoration: none; font-weight: 600; }
+.pay-back a:hover, .pay-foot a:hover { color: var(--maroon); text-decoration: underline; }
+.pay-card .btn { display: block; width: 100%; text-align: center; text-decoration: none; margin-top: 1rem; }
+
+/* ---------- Key/value rows ---------- */
+.pay-rows { display: block; }
+.pay-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border-soft);
+  font-size: 0.95rem;
+}
+.pay-row:last-child { border-bottom: none; }
+.pay-row-label { color: var(--text-muted); }
+.pay-row-value {
+  text-align: right;
+  font-weight: 600;
+  color: var(--text-dark);
+  overflow-wrap: anywhere;
+}
+.pay-row-value small.pay-sub { display: block; font-weight: 400; color: var(--text-muted); font-size: 0.76rem; }
+.pay-tbd { color: var(--text-muted); font-style: italic; font-weight: 500; }
+.pay-deduct { color: var(--crimson); }
+.pay-services { margin: 0; padding: 0; text-align: right; list-style: none; }
+.pay-services li { list-style: none; }
+.pay-services li::before { content: "• "; color: var(--gold); }
+
+/* ---------- Status badges (payment status is SEPARATE from reservation status) ---------- */
+.pay-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  border: 1.5px solid currentColor;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+.pay-badge-awaiting   { color: #7A5410; background: #F7EBCB; }
+.pay-badge-processing { color: #1F4E79; background: #DDEBF7; }
+.pay-badge-paid       { color: #2F4A22; background: #E4EDDA; }
+.pay-badge-failed     { color: #A13B2B; background: #F6E2DE; }
+
+/* ---------- Booking & Reservation Guidelines (all six rules) ---------- */
+.pay-guidelines {
+  margin: 0;
+  padding-left: 1.5rem;
+  list-style: decimal; /* nav.css resets ul/ol to list-style:none — restore the numbers */
+  font-size: 0.93rem;
+  line-height: 1.65;
+}
+.pay-guidelines li { margin-bottom: 0.85rem; padding-left: 0.35rem; }
+.pay-guidelines li::marker { color: var(--gold); font-weight: 700; }
+
+/* ---------- Verification form ---------- */
+.pay-field { margin-bottom: 1rem; }
+.pay-field label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  color: var(--crimson);
+  margin-bottom: 0.35rem;
+}
+.pay-field input {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  background: var(--cream-soft);
+  color: var(--text-dark);
+}
+.pay-err { color: #A13B2B; font-size: 0.86rem; font-weight: 600; margin-bottom: 0.6rem; }
+.pay-err:empty { display: none; }
+
+/* ---------- Payment methods (placeholders) ---------- */
+.pay-methods { display: grid; gap: 0.7rem; margin-top: 0.9rem; }
+.pay-method {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  background: var(--cream-soft);
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.pay-method:hover { border-color: var(--gold-light); }
+.pay-method:has(input:checked) { border-color: var(--gold); background: var(--cream-dim, #EFDFC6); }
+.pay-method input { accent-color: var(--maroon); width: 1.05rem; height: 1.05rem; }
+.pay-method-name { font-weight: 600; color: var(--text-dark); }
+.pay-tag {
+  margin-left: auto;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  font-weight: 700;
+}
+.pay-selected {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--sage, #5F6F52);
+}
+
+/* ---------- Test panel ---------- */
+.pay-test-card {
+  border: 2px dashed var(--gold);
+  background: #FFFDF7;
+}
+.pay-test-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.1rem;
+}
+.btn-test {
+  flex: 1 1 190px;
+  padding: 0.8rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid transparent;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-test:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+.btn-test-ok     { background: var(--sage, #5F6F52); color: #FBF6EE; }
+.btn-test-fail   { background: #A13B2B; color: #FBF6EE; }
+.btn-test-cancel { background: transparent; color: var(--crimson); border-color: var(--border-soft); }
+
+.pay-result {
+  margin-top: 1.1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid currentColor;
+  font-size: 0.93rem;
+}
+.pay-result p { margin: 0.25rem 0; }
+.pay-result-title {
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem !important;
+}
+.pay-result-status { font-size: 1.02rem; }
+.pay-result-ok  { color: #2F4A22; background: #E4EDDA; }
+.pay-result-fail{ color: #A13B2B; background: #F6E2DE; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 680px) {
+  .pay-main { padding: calc(var(--nav-height) + 1.5rem) 1rem 3rem; }
+  .pay-card { padding: 1.3rem; }
+  .pay-row { flex-direction: column; align-items: flex-start; gap: 0.15rem; }
+  .pay-row-value { text-align: left; }
+  .pay-services { text-align: left; }
+  .pay-test-actions { flex-direction: column; }
+  .btn-test { flex: 1 1 auto; }
+}
